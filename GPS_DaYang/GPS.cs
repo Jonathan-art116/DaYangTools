@@ -208,6 +208,7 @@ namespace GPS_DaYang
 
         private void button1_Click(object sender, EventArgs e)
         {
+            string time = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss");
             button1.Enabled = false;
             bool result = false;
             label3.Text = "";
@@ -229,12 +230,14 @@ namespace GPS_DaYang
             if (result == true && data.post == "YES")
             {
                 UpdataSQL(label2.Text, "Gps", "pass");
+                UpdataSQL(label2.Text, "GPSDT", time);
                 label5.Text = "PASS";
                 label5.ForeColor = Color.Green;
             }
             else if (result == false && data.post == "YES")
             {
                 UpdataSQL(label2.Text, "Gps","fail");
+                UpdataSQL(label2.Text, "GPSDT", time);
                 label5.Text = "Fail";
                 label5.ForeColor = Color.Red;
             }
@@ -317,7 +320,8 @@ namespace GPS_DaYang
 
         private void button2_Click(object sender, EventArgs e)
         {
-            if(CheckStation(label2.Text,data.station) == "true")
+            string time = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss");
+            if (CheckStation(label2.Text,data.station) == "true")
             {
                 button2.Enabled = false;
                 bool result = false;
@@ -340,12 +344,14 @@ namespace GPS_DaYang
                 if (result == true && data.post == "YES")
                 {
                     UpdataSQL(label2.Text, "Gps", "pass");
+                    UpdataSQL(label2.Text, "GPSDT", time);
                     label5.Text = "PASS";
                     label5.ForeColor = Color.Green;
                 }
                 else if (result == false && data.post == "YES")
                 {
                     UpdataSQL(label2.Text, "Gps", "fail");
+                    UpdataSQL(label2.Text, "GPSDT", time);
                     label5.Text = "Fail";
                     label5.ForeColor = Color.Red;
                 }

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using IniParser;
+using IniParser.Model;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -23,6 +25,14 @@ namespace DaYang
         {
             timer1.Interval = 1000;
             timer1.Start();
+            var parser = new FileIniDataParser();
+            IniData fromdata = parser.ReadFile("config.ini");
+            data.ver = fromdata["VersionInformation"]["VER"];
+        }
+
+        class data
+        {
+            public static string ver;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -36,6 +46,7 @@ namespace DaYang
                 main.UpdataSQL(label7.Text, "VER", label3.Text);
                 main.UpdataSQL(main.label2.Text, "DeviceInfo", "pass");
             }
+            main.button2.Enabled = true;
             this.Close();
         }
 
@@ -71,6 +82,14 @@ namespace DaYang
             main.serialPort1.Write("$VER:GET\r\n");
             //main.serialPort1.Write("$FLASH:INFO\r\n");
             main.serialPort1.Write("$LTE:SN\r\n");
+            //Console.WriteLine(label7.Text.Length);
+            if(label7.Text.Length > 7)
+            {
+                if (label3.Text == data.ver)
+                {
+                    button1.Enabled = true;
+                }
+            }
         }
 
         internal void MainFormTxtChaned(object sender, EventArgs e)

@@ -18,6 +18,9 @@ namespace WinFrmDemo
         public string SIM { get; set; }
         public string ICCID { get; set; }
         public string IMSI { get; set; }
-        public  string Battery { get; set; }
+        public string Battery { get; set; }
+        public string Slope { get; set; }
+        public string Can { get; set; }
+        public string Gettime { get; set; }
     }
 }

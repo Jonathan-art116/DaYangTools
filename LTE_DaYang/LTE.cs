@@ -211,6 +211,7 @@ namespace LTE_DaYang
         
         private void button1_Click(object sender, EventArgs e)
         {
+            string time = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss");
             if (data.station.Length > 2)
             {
                 if(CheckStation(label1.Text,data.station) == "true")
@@ -247,6 +248,7 @@ namespace LTE_DaYang
                             {
                                 if (label1.Text.Length > 10 && UpdataSQL(label1.Text, "LTE", "pass") == "ok")
                                 {
+                                    UpdataSQL(label1.Text, "LTEDT", time);
                                     label12.Text = "PASS";
                                     label12.ForeColor = Color.Green;
                                     button1.Enabled = true;
@@ -256,6 +258,7 @@ namespace LTE_DaYang
                             {
                                 if (label1.Text.Length > 10 && UpdataSQL(label1.Text, "LTE", "fail") == "ok")
                                 {
+                                    UpdataSQL(label1.Text, "LTEDT", time);
                                     label12.Text = "FAIL";
                                     label12.ForeColor = Color.Red;
                                     button1.Enabled = true;
@@ -323,6 +326,7 @@ namespace LTE_DaYang
                         {
                             if (label1.Text.Length > 10 && UpdataSQL(label1.Text, "LTE", "pass") == "ok")
                             {
+                                UpdataSQL(label1.Text, "LTEDT", time);
                                 label12.Text = "PASS";
                                 label12.ForeColor = Color.Green;
                                 button1.Enabled = true;
@@ -332,6 +336,7 @@ namespace LTE_DaYang
                         {
                             if (label1.Text.Length > 10 && UpdataSQL(label1.Text, "LTE", "fail") == "ok")
                             {
+                                UpdataSQL(label1.Text, "LTEDT", time);
                                 label12.Text = "FAIL";
                                 label12.ForeColor = Color.Red;
                                 button1.Enabled = true;

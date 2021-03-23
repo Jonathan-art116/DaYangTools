@@ -68,6 +68,12 @@
     <Compile Include="Battery.Designer.cs">
       <DependentUpon>Battery.cs</DependentUpon>
     </Compile>
+    <Compile Include="Can.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Can.Designer.cs">
+      <DependentUpon>Can.cs</DependentUpon>
+    </Compile>
     <Compile Include="Flash.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -119,8 +125,23 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="slope.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="slope.Designer.cs">
+      <DependentUpon>slope.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Time.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Time.Designer.cs">
+      <DependentUpon>Time.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Battery.resx">
       <DependentUpon>Battery.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Can.resx">
+      <DependentUpon>Can.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DeviceInfo.resx">
       <DependentUpon>DeviceInfo.cs</DependentUpon>
@@ -156,6 +177,12 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="slope.resx">
+      <DependentUpon>slope.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Time.resx">
+      <DependentUpon>Time.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="config.ini">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

@@ -27,6 +27,29 @@ namespace DaYang
 
         private void Main_Load(object sender, EventArgs e)
         {
+            var parser = new FileIniDataParser();
+            IniData fromdata = parser.ReadFile("config.ini");
+            data.ip = fromdata["database"]["ip"];
+            data.database = fromdata["database"]["database"];
+            data.username = fromdata["database"]["username"];
+            data.password = fromdata["database"]["password"];
+            data.port = fromdata["database"]["port"];
+            data.tablename = fromdata["database"]["tablename"];
+            data.post = fromdata["mysql"]["post"];
+            label3.Text = data.post;
+            data.connstr = "server=" + data.ip + ";user=" + data.username + ";database=" + data.database + ";port=" + data.port + ";password=" + data.password;
+            MySqlConnection conn = new MySqlConnection(data.connstr);
+            try
+            {
+                conn.Open();
+                create();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message + "数据库连接失败,请检查数据库配置", "错误提示");
+            }
+            conn.Close();
+            
             RegistryKey keyCom = Registry.LocalMachine.OpenSubKey("Hardware\\DeviceMap\\SerialComm");
             if (keyCom != null)
             {
@@ -56,28 +79,6 @@ namespace DaYang
                     isOpened = true;
                     serialPort1.DataReceived += new SerialDataReceivedEventHandler(post_DataReceived);//串口接收处理函数
                     button1.Enabled = true;
-                    var parser = new FileIniDataParser();
-                    IniData fromdata = parser.ReadFile("config.ini");
-                    data.ip = fromdata["database"]["ip"];
-                    data.database = fromdata["database"]["database"];
-                    data.username = fromdata["database"]["username"];
-                    data.password = fromdata["database"]["password"];
-                    data.port = fromdata["database"]["port"];
-                    data.tablename = fromdata["database"]["tablename"];
-                    data.post= fromdata["mysql"]["post"];
-                    label3.Text = data.post;
-                    data.connstr = "server=" + data.ip + ";user=" + data.username + ";database=" + data.database + ";port=" + data.port + ";password=" + data.password;
-                    MySqlConnection conn = new MySqlConnection(data.connstr);
-                    try
-                    {
-                        conn.Open();
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message + "数据库连接失败,请检查数据库配置","错误提示");
-                    }
-                    conn.Close();
-                    create();
                 }
                 catch
                 {
@@ -108,6 +109,8 @@ namespace DaYang
                     button7.BackColor = Color.Gray;
                     button8.Enabled = false;
                     button8.BackColor = Color.Gray;
+                    button9.Enabled = false;
+                    button9.BackColor = Color.Gray;
                 }
                 catch
                 {
@@ -154,17 +157,24 @@ namespace DaYang
                                 + "ICCID char(24) UNIQUE,"
                                 + "VER char(20),"
                                 + "DeviceInfo char(8),"
-                                + "Flash char(8),"
                                 + "Music char(8),"
                                 + "PKE char(8),"
                                 + "Battery char(8),"
                                 + "Module char(8),"
                                 + "GpioInput char(8),"
                                 + "GpioOutput char(8),"
+                                + "Slope char(8),"
+                                + "Time char(8),"
+                                + "Can char(8),"
+                                + "PCBDT datetime,"
+                                + "SleepPower char(50),"
+                                + "SleepPowerDbTime char(50),"
                                 + "BLE char(8),"
                                 + "BLEDT datetime,"
                                 + "Gps char(8),"
-                                + "LTE char(8))";
+                                + "GPSDT datetime,"
+                                + "LTE char(8),"
+                                + "LTEDT datetime)";
                 MySqlCommand creat = new MySqlCommand(creatdatabase, conn);
                 try
                 {
@@ -173,7 +183,6 @@ namespace DaYang
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message);
-                    this.Close();
                 }
             }
             catch (Exception ex)
@@ -302,7 +311,7 @@ namespace DaYang
             public static string truedatag;
             public static string volt;
             public static string ver;
-            public static string flash;
+            //public static string flash;
             public static string writer;
             public static string SN;
             public static string IMEI;
@@ -318,6 +327,9 @@ namespace DaYang
             public static string tablename;
             public static string connstr;
             public static string post;
+            public static string slope;
+            public static string can;
+            public static string time;
         }
 
         public void post_DataReceived(object sender, SerialDataReceivedEventArgs e)
@@ -332,18 +344,18 @@ namespace DaYang
                 {
                     data.ver = t_data[2];
                 }
-                else if (datav.IndexOf("$FLASH:j") == 0)
-                {
-                    data.flash = t_data[1];
-                    Invoke((new Action(() =>
-                    {
-                        SendMsgEvent(this, new MyEventArg() { Flash = data.flash });
-                    })));
-                }
-                else if (datav.IndexOf("$FLASH:OK") == 0)
-                {
-                    data.writer = t_data[1];
-                }
+                //else if (datav.IndexOf("$FLASH:j") == 0)
+                //{
+                //    data.flash = t_data[1];
+                //    Invoke((new Action(() =>
+                //    {
+                //        SendMsgEvent(this, new MyEventArg() { Flash = data.flash });
+                //    })));
+                //}
+                //else if (datav.IndexOf("$FLASH:OK") == 0)
+                //{
+                //    data.writer = t_data[1];
+                //}
                 else if (datav.IndexOf("$LTE:SN") == 0)
                 {
                     data.SN = t_data[2];
@@ -389,6 +401,31 @@ namespace DaYang
                 {
                     data.ICCID = t_data[2];
                 }
+                else if (datav.IndexOf("$ACCEL") == 0)
+                {
+                    //data.slope = t_data[1];
+                    data.slope = "震动告警已触发";
+                    Invoke((new Action(() =>
+                    {
+                        SendMsgEvent(this, new MyEventArg() { Slope = data.slope });
+                    })));
+                }
+                else if (datav.IndexOf("$LTE:TIME") == 0)
+                {
+                    data.time = t_data[2];
+                    Invoke((new Action(() =>
+                    {
+                        SendMsgEvent(this, new MyEventArg() { Gettime = data.time });
+                    })));
+                }
+                else if (datav.IndexOf("$CAN:IPK") == 0)
+                {
+                    data.can = t_data[2];
+                    Invoke((new Action(() =>
+                    {
+                        SendMsgEvent(this, new MyEventArg() { Can = data.can });
+                    })));
+                }
                 else if (datav.IndexOf("$LTE:IMSI") == 0)
                 {
                     data.IMSI = t_data[2];
@@ -416,13 +453,6 @@ namespace DaYang
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            button2.Enabled = true;
-            button3.Enabled = true;
-            button4.Enabled = true;
-            button5.Enabled = true;
-            button6.Enabled = true;
-            button7.Enabled = true;
-            button8.Enabled = true;
             DeviceInfo deviceInfo = new DeviceInfo
             {
                 Owner = this
@@ -433,6 +463,7 @@ namespace DaYang
 
         private void button2_Click(object sender, EventArgs e)
         {
+            button3.Enabled = true;
             serialPort1.Write("$MUSIC:START\r\n");
             Thread.Sleep(1000);
             Music music = new Music
@@ -444,6 +475,7 @@ namespace DaYang
 
         private void button3_Click(object sender, EventArgs e)
         {
+            button4.Enabled = true;
             serialPort1.Write("$PKE:START\r\n");
             Thread.Sleep(1000);
             PKE pKE = new PKE
@@ -457,6 +489,7 @@ namespace DaYang
         public event EventHandler SendMsgEventBat;
         private void button6_Click(object sender, EventArgs e)
         {
+            button8.Enabled = true;
             serialPort1.Write("$GPIO:INPUT\r\n");
             GpioInput gpioInput = new GpioInput
             {
@@ -468,6 +501,7 @@ namespace DaYang
 
         private void button4_Click(object sender, EventArgs e)
         {
+            button5.Enabled = true;
             serialPort1.Write("$ADC:VOLTAGE\r\n\r\n");
             Battery battery = new Battery
             {
@@ -479,6 +513,7 @@ namespace DaYang
 
         private void button5_Click(object sender, EventArgs e)
         {
+            button7.Enabled = true;
             Module module = new Module
             {
                 Owner = this
@@ -489,6 +524,7 @@ namespace DaYang
 
         private void button7_Click(object sender, EventArgs e)
         {
+            button6.Enabled = true;
             GpioOuput gpioOuput = new GpioOuput
             {
                 Owner = this
@@ -498,33 +534,34 @@ namespace DaYang
 
         private void button8_Click(object sender, EventArgs e)
         {
-            button8.Enabled = false;
-            progressBar1.Value = 1;
-            serialPort1.Write("$FLASH:WRITE\r\n");
-            Flash flash = new Flash()
+            button10.Enabled = true;
+            slope Slope = new slope
             {
                 Owner = this
             };
-            SendMsgEvent += flash.MainFormTxtChaned;
-            progressBar1.Visible = true;
-            for (int x = 0; x <= 11; x++)
+            SendMsgEvent += Slope.MainFormTxtChaned;
+            Slope.ShowDialog();
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            Can can = new Can
             {
-                Thread.Sleep(1000);
-                progressBar1.PerformStep();
-            }
-            if (data.writer == "OK")
+                Owner = this
+            };
+            SendMsgEvent += can.MainFormTxtChaned;
+            can.ShowDialog();
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            button9.Enabled = true;
+            Time time = new Time
             {
-                flash.ShowDialog();
-                progressBar1.Visible = false;
-            }
-            else
-            {
-                MessageBox.Show("写入音频数据失败", "Error");
-                UpdataSQL(label2.Text, "Flash", "fail");
-                button8.BackColor = Color.Red;
-                progressBar1.Visible = false;
-            }
-            button8.Enabled = true;
+                Owner = this
+            };
+            SendMsgEvent += time.MainFormTxtChaned;
+            time.ShowDialog();
         }
     }
 }

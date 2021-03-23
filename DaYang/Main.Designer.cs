@@ -39,9 +39,10 @@ namespace DaYang
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.button10 = new System.Windows.Forms.Button();
+            this.button9 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
             this.button7 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.button6 = new System.Windows.Forms.Button();
@@ -72,7 +73,7 @@ namespace DaYang
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(164, 20);
+            this.label3.Location = new System.Drawing.Point(184, 3);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(35, 20);
             this.label3.TabIndex = 11;
@@ -81,9 +82,10 @@ namespace DaYang
             // 
             // SerialButton
             // 
-            this.SerialButton.Location = new System.Drawing.Point(149, 43);
+            this.SerialButton.Font = new System.Drawing.Font("Microsoft YaHei", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.SerialButton.Location = new System.Drawing.Point(134, 37);
             this.SerialButton.Name = "SerialButton";
-            this.SerialButton.Size = new System.Drawing.Size(90, 28);
+            this.SerialButton.Size = new System.Drawing.Size(104, 36);
             this.SerialButton.TabIndex = 1;
             this.SerialButton.Text = "打开串口";
             this.SerialButton.UseVisualStyleBackColor = true;
@@ -92,7 +94,7 @@ namespace DaYang
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(7, 44);
+            this.comboBox1.Location = new System.Drawing.Point(7, 41);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(121, 28);
             this.comboBox1.TabIndex = 0;
@@ -122,9 +124,10 @@ namespace DaYang
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.label2);
-            this.groupBox3.Controls.Add(this.progressBar1);
+            this.groupBox3.Controls.Add(this.button10);
+            this.groupBox3.Controls.Add(this.button9);
             this.groupBox3.Controls.Add(this.button8);
+            this.groupBox3.Controls.Add(this.label2);
             this.groupBox3.Controls.Add(this.button7);
             this.groupBox3.Controls.Add(this.label1);
             this.groupBox3.Controls.Add(this.button6);
@@ -140,6 +143,51 @@ namespace DaYang
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "测试项";
             // 
+            // button10
+            // 
+            this.button10.BackColor = System.Drawing.Color.Gray;
+            this.button10.Enabled = false;
+            this.button10.FlatAppearance.BorderSize = 0;
+            this.button10.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button10.Font = new System.Drawing.Font("Microsoft YaHei", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button10.Location = new System.Drawing.Point(534, 347);
+            this.button10.Name = "button10";
+            this.button10.Size = new System.Drawing.Size(173, 66);
+            this.button10.TabIndex = 13;
+            this.button10.Text = "网络时间";
+            this.button10.UseVisualStyleBackColor = false;
+            this.button10.Click += new System.EventHandler(this.button10_Click);
+            // 
+            // button9
+            // 
+            this.button9.BackColor = System.Drawing.Color.Gray;
+            this.button9.Enabled = false;
+            this.button9.FlatAppearance.BorderSize = 0;
+            this.button9.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button9.Font = new System.Drawing.Font("Microsoft YaHei", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button9.Location = new System.Drawing.Point(32, 497);
+            this.button9.Name = "button9";
+            this.button9.Size = new System.Drawing.Size(173, 66);
+            this.button9.TabIndex = 12;
+            this.button9.Text = "CAN通讯";
+            this.button9.UseVisualStyleBackColor = false;
+            this.button9.Click += new System.EventHandler(this.button9_Click);
+            // 
+            // button8
+            // 
+            this.button8.BackColor = System.Drawing.Color.Gray;
+            this.button8.Enabled = false;
+            this.button8.FlatAppearance.BorderSize = 0;
+            this.button8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button8.Font = new System.Drawing.Font("Microsoft YaHei", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button8.Location = new System.Drawing.Point(283, 347);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(173, 66);
+            this.button8.TabIndex = 11;
+            this.button8.Text = "震动告警";
+            this.button8.UseVisualStyleBackColor = false;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
+            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -150,37 +198,14 @@ namespace DaYang
             this.label2.Text = "null";
             this.label2.Visible = false;
             // 
-            // progressBar1
-            // 
-            this.progressBar1.Location = new System.Drawing.Point(283, 113);
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(173, 30);
-            this.progressBar1.TabIndex = 9;
-            this.progressBar1.Visible = false;
-            // 
-            // button8
-            // 
-            this.button8.BackColor = System.Drawing.Color.Gray;
-            this.button8.Enabled = false;
-            this.button8.FlatAppearance.BorderSize = 0;
-            this.button8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button8.Font = new System.Drawing.Font("Microsoft YaHei", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button8.Location = new System.Drawing.Point(283, 41);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(173, 66);
-            this.button8.TabIndex = 8;
-            this.button8.Text = "Flash写入";
-            this.button8.UseVisualStyleBackColor = false;
-            this.button8.Click += new System.EventHandler(this.button8_Click);
-            // 
             // button7
             // 
             this.button7.BackColor = System.Drawing.Color.Gray;
             this.button7.Enabled = false;
             this.button7.FlatAppearance.BorderSize = 0;
             this.button7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button7.Font = new System.Drawing.Font("Microsoft YaHei", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button7.Location = new System.Drawing.Point(283, 347);
+            this.button7.Font = new System.Drawing.Font("Microsoft YaHei", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button7.Location = new System.Drawing.Point(534, 197);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(173, 66);
             this.button7.TabIndex = 7;
@@ -204,7 +229,7 @@ namespace DaYang
             this.button6.Enabled = false;
             this.button6.FlatAppearance.BorderSize = 0;
             this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button6.Font = new System.Drawing.Font("Microsoft YaHei", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button6.Font = new System.Drawing.Font("Microsoft YaHei", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button6.Location = new System.Drawing.Point(32, 347);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(173, 66);
@@ -219,8 +244,8 @@ namespace DaYang
             this.button5.Enabled = false;
             this.button5.FlatAppearance.BorderSize = 0;
             this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button5.Font = new System.Drawing.Font("Microsoft YaHei", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button5.Location = new System.Drawing.Point(534, 197);
+            this.button5.Font = new System.Drawing.Font("Microsoft YaHei", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button5.Location = new System.Drawing.Point(283, 197);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(173, 66);
             this.button5.TabIndex = 4;
@@ -234,8 +259,8 @@ namespace DaYang
             this.button4.Enabled = false;
             this.button4.FlatAppearance.BorderSize = 0;
             this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button4.Font = new System.Drawing.Font("Microsoft YaHei", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button4.Location = new System.Drawing.Point(283, 197);
+            this.button4.Font = new System.Drawing.Font("Microsoft YaHei", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button4.Location = new System.Drawing.Point(32, 197);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(173, 66);
             this.button4.TabIndex = 3;
@@ -249,8 +274,8 @@ namespace DaYang
             this.button3.Enabled = false;
             this.button3.FlatAppearance.BorderSize = 0;
             this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Font = new System.Drawing.Font("Microsoft YaHei", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button3.Location = new System.Drawing.Point(32, 197);
+            this.button3.Font = new System.Drawing.Font("Microsoft YaHei", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button3.Location = new System.Drawing.Point(534, 40);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(173, 66);
             this.button3.TabIndex = 2;
@@ -264,8 +289,8 @@ namespace DaYang
             this.button2.Enabled = false;
             this.button2.FlatAppearance.BorderSize = 0;
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Font = new System.Drawing.Font("Microsoft YaHei", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button2.Location = new System.Drawing.Point(534, 41);
+            this.button2.Font = new System.Drawing.Font("Microsoft YaHei", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button2.Location = new System.Drawing.Point(283, 40);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(173, 66);
             this.button2.TabIndex = 1;
@@ -279,7 +304,7 @@ namespace DaYang
             this.button1.Enabled = false;
             this.button1.FlatAppearance.BorderSize = 0;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Microsoft YaHei", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button1.Font = new System.Drawing.Font("Microsoft YaHei", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button1.Location = new System.Drawing.Point(32, 41);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(173, 66);
@@ -334,10 +359,11 @@ namespace DaYang
         public System.Windows.Forms.Button button4;
         private System.Windows.Forms.Label label1;
         public System.Windows.Forms.Button button7;
-        public System.Windows.Forms.Button button8;
-        public System.Windows.Forms.ProgressBar progressBar1;
         public System.Windows.Forms.Label label2;
         public System.Windows.Forms.Label label3;
+        public System.Windows.Forms.Button button8;
+        public System.Windows.Forms.Button button9;
+        public System.Windows.Forms.Button button10;
     }
 }
 

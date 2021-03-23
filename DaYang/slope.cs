@@ -11,56 +11,60 @@ using WinFrmDemo;
 
 namespace DaYang
 {
-    public partial class Flash : Form
+    public partial class slope : Form
     {
-        public Flash()
+        public slope()
         {
             InitializeComponent();
         }
 
+        private void slope_Load(object sender, EventArgs e)
+        {
+            timer1.Interval = 1000;
+            timer1.Start();
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
-            Main main = (Main)this.Owner;
             timer1.Stop();
+            Main main = (Main)this.Owner;
+            main.button8.BackColor = Color.Green;
             if(main.label2.Text.Length > 10 && main.label3.Text == "YES")
             {
-                main.UpdataSQL(main.label2.Text, "Flash", "pass");
+                main.UpdataSQL(main.label2.Text, "Slope", "pass");
             }
             this.Close();
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            Main main = (Main)this.Owner;
             timer1.Stop();
+            Main main = (Main)this.Owner;
+            main.button8.BackColor = Color.Red;
             if (main.label2.Text.Length > 10 && main.label3.Text == "YES")
             {
-                main.UpdataSQL(main.label2.Text, "Flash", "fail");
+                main.UpdataSQL(main.label2.Text, "Slope", "fail");
             }
             this.Close();
         }
-
-        public void Setlab2(string flash)
-        {
-            this.label2.Text = flash;
-        }
-
         internal void MainFormTxtChaned(object sender, EventArgs e)
         {
             //取到主窗体的传来的文本
             MyEventArg arg = e as MyEventArg;
-            this.Setlab2(arg.Flash);
-        }
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            Main main = (Main)this.Owner;
-            main.serialPort1.Write("$FLASH:INFO\r\n");
+            this.Setlab(arg.Slope);
         }
 
-        private void Flash_Load(object sender, EventArgs e)
+        public void Setlab(string Batt)
         {
-            timer1.Interval = 1000;
-            timer1.Start();
+            this.label1.Text = Batt;
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            if(label1.Text == "震动告警已触发")
+            {
+                button1.Enabled = true;
+            }
         }
     }
 }

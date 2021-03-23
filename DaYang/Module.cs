@@ -1,4 +1,6 @@
-﻿using System;
+﻿using IniParser;
+using IniParser.Model;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -17,6 +19,20 @@ namespace DaYang
         public Module()
         {
             InitializeComponent();
+        }
+
+        private void Module_Load(object sender, EventArgs e)
+        {
+            timer1.Interval = 1000;
+            timer1.Start();
+            var parser = new FileIniDataParser();
+            IniData fromdata = parser.ReadFile("config.ini");
+            mver.ver = fromdata["VersionInformation"]["Module_VER"];
+        }
+
+        class mver
+        {
+            public static string ver;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -88,12 +104,12 @@ namespace DaYang
             main.serialPort1.Write("$LTE:SIM\r\n");
             main.serialPort1.Write("$LTE:ICCID\r\n");
             main.serialPort1.Write("$LTE:IMSI\r\n");
+            if(mver.ver == label10.Text)
+            {
+                button1.Enabled = true;
+            }
         }
 
-        private void Module_Load(object sender, EventArgs e)
-        {
-            timer1.Interval = 1000;
-            timer1.Start();
-        }
+    
     }
 }

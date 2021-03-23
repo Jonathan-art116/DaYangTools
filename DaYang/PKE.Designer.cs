@@ -36,6 +36,7 @@ namespace DaYang
             // 
             // button1
             // 
+            this.button1.Font = new System.Drawing.Font("Microsoft YaHei", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button1.Location = new System.Drawing.Point(93, 642);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(329, 67);
@@ -46,6 +47,7 @@ namespace DaYang
             // 
             // button3
             // 
+            this.button3.Font = new System.Drawing.Font("Microsoft YaHei", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button3.Location = new System.Drawing.Point(609, 642);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(329, 67);
@@ -57,10 +59,10 @@ namespace DaYang
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("微软雅黑", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.Location = new System.Drawing.Point(428, 301);
+            this.label1.Font = new System.Drawing.Font("Microsoft YaHei", 42F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label1.Location = new System.Drawing.Point(361, 304);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(187, 46);
+            this.label1.Size = new System.Drawing.Size(301, 75);
             this.label1.TabIndex = 5;
             this.label1.Text = "PKE模式开";
             // 
@@ -73,7 +75,7 @@ namespace DaYang
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button1);
-            this.Font = new System.Drawing.Font("微软雅黑", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.Font = new System.Drawing.Font("Microsoft YaHei", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "PKE";
